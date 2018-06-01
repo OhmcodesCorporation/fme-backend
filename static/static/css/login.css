@@ -1,0 +1,25 @@
+.main {
+	text-align: center;
+	padding-top: 5em;
+	padding-bottom: 3.5em;
+}
+#log.row {
+	display: inline-block; 
+	padding: 2em 3em 0 3em; 
+	border: 1px solid #EEE;
+}
+#log.col {
+	padding-top: 1em;
+}  
+#log-btn.row {
+	padding: 2em 0 1em 0;
+}
+#log label {
+	float: right;
+    padding-right: 1em;
+}
+#log-s {
+	display: inline-block;
+	padding: 0.5em;
+	margin-right: 1em;
+}

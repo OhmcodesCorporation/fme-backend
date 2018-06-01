@@ -1,0 +1,14 @@
+Hello {{ user.username }},
+
+You have successfully registered on FundmyEvent. Please click the link below to confirm your email address and
+activate your account:
+http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+
+If you are unfamiliar with this email and the associated site, Please discard this email.
+
+
+Regards,
+FME
+
+For any enquires please contact us at: support@fme.com.

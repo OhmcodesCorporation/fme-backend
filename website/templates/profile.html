@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+<title>Profile</title>
+{% endblock %}
+
+{% block content %}
+<h1>Welcome, {{ usr_info.first_name }} </h1>
+<p>
+	Email Address: {{ usr_info.email }}
+</p>
+{% endblock %}
+
+
+{% block javascript %}
+
+{% endblock %}

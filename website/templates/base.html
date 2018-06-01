@@ -1,0 +1,330 @@
+{% load staticfiles %}
+{% load static %}
+{% get_media_prefix as STATIC_MEDIA %}
+{% get_static_prefix as STATIC_URL %}
+{% load app_filters %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	
+
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--fontawesome-->
+	<link href="{% static 'css/fontawesome-all.css' %}" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="{% static 'css/materialize.min.css' %}"  media="screen,projection"/>
+
+	<link type="text/css" rel="stylesheet" href="{% static 'css/main.css' %}"/>
+
+	<link type="text/css" rel="stylesheet" href="{% static 'css/fontawesome-stars.css' %}"/>
+	<link type="text/css" rel="stylesheet" href="{% static 'css/login2.css' %}"/>
+
+	<script src="https://use.fontawesome.com/44ada61f98.js"></script>
+
+	{% block head %}
+		<!--#Title goes here... template.html-->
+	{% endblock %}
+
+
+
+</head>
+<body>
+	<div class="navbar-fixed">
+	<nav class="black" role="navigation">
+		<div class="nav-wrapper container">
+			<a id="logo-container" href="/" class="brand-logo"><img src="{{ STATIC_MEDIA }}logo.png" style="height: 60px;" /></a>
+			<ul id="dropdown1" class="dropdown-content">
+				{% if user.is_authenticated %}
+				<li><a href="/profile/">Profile</a></li>
+				<li class="divider"></li>
+				<li><a href="{% url 'logout' %}">Log Out</a></li>
+				{% else %}
+				<li><a href="{% url 'login' %}">Log In</a></li>
+				<li><a href="{% url 'signuppage' %}">Sign Up</a></li>
+				{% endif %}
+			</ul>
+
+			<ul class="right hide-on-med-and-down">
+				<li><a href="/">Home</a></li>
+				<li><a href="/aboutus/">About</a></li>
+				<li><a href="/contactus/">Contact us</a></li>
+				{% if user.is_authenticated %}
+				<li>
+					<a href="#!" data-activates="dropdown1" class="dropdown-trigger waves-effect waves-light yellow accent-4 btn">{{ user.username }}
+						<i class="material-icons right">arrow_drop_down</i>
+					</a>
+				</li>
+				{% else %}
+				<li>
+					<a href="#!" data-activates="dropdown1" class="dropdown-trigger waves-effect waves-light yellow accent-4 btn">Login/Sign Up
+						<i class="material-icons right">arrow_drop_down</i>
+					</a>
+				</li>
+				{% endif %}
+			</ul>
+			<!--mobile markup-->
+			<!-- <ul id="nav-mobile" class="sidenav">
+				<li><a href="/showcase/">Showcase</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="/contact/">Contact US</a></li>
+			</ul>
+			<a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a> -->
+		</div>
+	</nav>
+	</div>
+
+	{% block content %}
+		
+	{% endblock %}
+
+	<!-- Modal Structure -->
+	<!-- <div id="makeitmine" class="modal">
+		<div class="modal-content">
+			<h4>Validate Trading Password</h4>
+			<form id="frmtrdpwd" autocomplete="off">
+			<p>
+				<div class="input-field">
+					<input type="hidden" id="input_pid" name="pid">
+					<label for="#tradepwd">Password</label>
+					<input type="password" id="tradepwd" name="tradepwd"/>
+				</div>
+				<span class="red-text" id="val_error"></span>
+			</p>
+			</form>
+		</div>
+		<div class="modal-footer">
+			<a class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+			<a class="modal-action waves-effect waves-green btn-flat" id="btn_val_trdpwd">Confirm</a>
+		</div>
+	</div> -->
+
+
+	<footer class="page-footer grey {{ sidebar_conf.sidenavClass }}">
+		<div class="container">
+			<div class="row">
+				<div class="col l3 s12">
+					<h5 class="white-text">About us</h5>
+					<p class="grey-text text-lighten-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Settings</h5>
+					<ul>
+					<li><a class="white-text" href="#!">Link 1</a></li>
+					<li><a class="white-text" href="#!">Link 2</a></li>
+					<li><a class="white-text" href="#!">Link 3</a></li>
+					<li><a class="white-text" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Connect</h5>
+					<ul>
+					<li><a class="white-text" href="#!">Link 1</a></li>
+					<li><a class="white-text" href="#!">Link 2</a></li>
+					<li><a class="white-text" href="#!">Link 3</a></li>
+					<li><a class="white-text" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+				<div class="col l3 s12">
+					<h5 class="white-text">Connect</h5>
+					<ul>
+					<li><a class="white-text" href="#!">Link 1</a></li>
+					<li><a class="white-text" href="#!">Link 2</a></li>
+					<li><a class="white-text" href="#!">Link 3</a></li>
+					<li><a class="white-text" href="#!">Link 4</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="footer-copyright grey lighten-1">
+			<div class="container">
+				<span>
+					Copyright © 2018 FundMyEvent All rights reserved.
+				</span>
+				<span class="right">
+					Design and Developed by: NCI
+				</span>
+			</div>
+		</div>
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<!--JavaScript at end of body for optimized loading-->
+	<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+	<!--counterUp-->
+	<script src="{% static 'js/jquery.countTo.js' %}"></script>
+
+	<script src="{% static 'js/jquery.countDown.js' %}"></script>
+
+	<script src="{% static 'js/jquery.barrating.js' %}"></script>
+	<!--jQuery Initialize-->
+	<script src="{% static 'js/init.js' %}"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$('.modal').modal();
+
+			//get pid
+			$('.btn-makeitmine').on('click',function(){
+				var pid = $(this).attr('data-pid');
+				$('#frmtrdpwd').find("input").val("");
+				$('#val_error').html("");
+				$('#input_pid').val(pid);
+			});
+
+			$('#btn_val_trdpwd').click(function(){
+				 $.ajax({
+					url: '/validate/',
+					method: 'POST',
+					data: $('#frmtrdpwd').serialize(),
+					success: function(result){
+						console.log(result);
+						if(result.data>0){
+							$('#makeitmine').modal('close');
+							location.href="/showcase/"+result.data+"/";
+						} else {
+							$('#val_error').html(result.data);
+
+						}
+					}
+				}); 
+			});
+
+
+			var usrid="{{ user.id }}";
+
+			if(usrid > 0){
+				//add function to add current localstorage after signup or login via ajax
+				console.log("user logged.");
+			}
+			
+			$('#btn_watchlist').click(function(){
+				
+				wl = JSON.parse(localStorage.getItem('watchlist'));
+				window.location.href = '/watchlist/?wl='+wl;
+				// $.ajax({
+				// 	url:'/watchlist/',
+				// 	type: 'GET',
+				// 	data: {'wlists':wl}
+
+				// });
+			});
+
+			$('.btn-add-watchlist').on('click',function(){
+				var usrid = "{{ user.id }}";
+				var prid = $(this).attr('data-pid');
+				var watched = JSON.parse(localStorage.getItem('watchlist'));
+				var wlist = [];
+				//localStorage.clear();
+				if(watched != null){
+					//console.log("watched has value");
+					$.each(watched, function(x,y){
+						//console.log("found in exist "+$.inArray(y, wlist));
+						if ($.inArray(y, wlist) == -1) {
+							wlist.push(parseInt(y));
+						}
+					});
+					
+				}
+
+				if(usrid > 0){
+					//if logged add wishlist to database via ajax.
+					console.log("user logged.");
+				} else {
+					//console.log("found in not exist "+$.inArray(prid, wlist));
+					if ($.inArray(prid, wlist) == -1) {
+						//console.log("triggered");
+						wlist.push(parseInt(prid));
+
+						localStorage.setItem('watchlist',JSON.stringify(wlist));
+					}
+				}
+				//console.log("my list "+ localStorage.getItem('watchlist'));
+				// $.ajax({
+				// 	url: '/addrating/',
+				// 	method: 'POST',
+				// 	data: $('#frm_thumb').serialize(),
+				// 	success: function(result){
+				// 		//var data = jsonParse(result.data);
+				// 		if(result.data==1){
+				// 			location.reload();
+				// 		} else {
+				// 			console.log(result);
+				// 		}
+				// 	}
+				// });
+			});
+
+
+			$('.tooltipped').tooltip();
+
+			$(".dropdown-trigger").dropdown({
+				hover: true, 
+				constrainWidth: false,
+				belowOrigin: true,
+				alignment: 'right',
+			});
+
+			$(".dropdown-trigger-showcase").dropdown({
+				inDuration: 300,
+				outDuration: 225,
+				hover: true, 
+				constrainWidth: false,
+				belowOrigin: true,
+			});
+
+			//var subcat = $.parseJSON($('.subcat').attr('data-sub'));
+
+
+			$('.dropdown-subcategory').hover(
+				function(){
+					$('.noshow').hide();
+					$('.subcat').hide();
+					var subclass = $(this).attr('data-sub');
+					$('.'+subclass).fadeIn();
+					//$('.noshow').toggle( "slide" );
+					$('.noshow').animate({width:'toggle'},350);
+				},
+				function(){
+					
+				}
+			);
+
+			$(".dropdown-row").hover(
+				function(){},
+				function(){
+					$('.noshow').hide();
+				}
+			);
+
+			// $('.dropdown-trigger2').dropdown({
+			// 	inDuration: 300,
+			// 	outDuration: 225,
+			// 	constrain_width: false, // Does not change width of dropdown to that of the activator
+			// 	hover: true, // Activate on hover
+			// 	gutter: ($('.dropdown-content').width()*2)/6, // Spacing from edge
+			// 	belowOrigin: false, // Displays dropdown below the button
+			// 	alignment: 'right' // Displays dropdown with edge aligned to the left of button
+			// });
+
+			var defdate = new Date("January 01, 1970 00:00:00");
+			var middate = new Date("January 01, 1970 00:00:00");
+			var maxdate = new Date("December 01, 2000 00:00:00");
+			$('#id_birth_date').pickadate({ 
+				format: 'yyyy-mm-dd', 
+				defaultDate: defdate,
+				minDate: middate,
+				maxDate: maxdate,
+				yearRange: 30
+			});
+		});
+	</script>
+	{% block javascript %}
+	{% endblock %}
+</body>
+</html>

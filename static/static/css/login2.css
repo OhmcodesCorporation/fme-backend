@@ -1,0 +1,119 @@
+.main {
+	padding-top: 5em;
+	padding-bottom: 3.5em;
+	display: flex;
+	display: -webkit-flex; /* Safari */
+}
+#content-left{
+	text-align: center;
+	padding-left: 10%;
+	width: 50%;
+	margin-right: 6em;
+}
+div #vert-hr{ 
+    border:         none;
+    border-left:    2px solid rgba(128,128,128,0.4);
+    height:         30em;
+    width:          1px;     
+    margin: 0;  
+}
+#or{
+	position: relative;
+	text-align: center;
+	margin-left: -26px;
+	border: 2px solid rgba(128,128,128,0.4);
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	padding-top: 10px;
+	margin-top: 10%;
+	z-index: 1;
+	background-color: #fff;
+}
+#content-right{
+	margin-left: 2em;
+	padding-top: 2em; 
+}
+#login{
+	margin-right: 0;
+}
+#heading {
+	display: inline-block; 
+	padding: 0.5em 2em 0.5em 2em;
+	color:white; 
+	margin-bottom: 0;
+}
+#log.row {
+	display: inline-block; 
+	padding: 2em 3em 0 3em; 
+	border: 1px solid #EEE;
+}
+#log.col {
+	padding-top: 1em;
+}  
+#log-btn.row {
+	padding: 2em 0 1em 0;
+}
+#log label {
+	float: right;
+    padding-right: 1em;
+}
+#log-s {
+	display: inline-block;
+	padding: 0.5em;
+	margin-left: 10em;
+}
+.social-btn{
+	margin: 1em;
+}
+.btn-large.social{
+	min-width: 20rem; 
+	padding: 0 2rem 0 0;
+}
+.btn-large.social > :first-child {
+	border-right: 1px solid rgba(0, 0, 0, 0.2);
+}
+.btn-large.social i{
+	padding: 0 1rem;
+	margin-right: 1rem;
+}
+.google {
+	background-color: #dd4b39;
+	color: #fff !important;
+}
+.google i {
+	color: #fff !important;
+}
+.google:hover {
+  background-color: #e47365 !important;
+}
+.btn-large.social.facebook{
+	padding: 0 0.5rem 0 0 !important;
+}
+.facebook {
+	background-color: #3b5998;
+	color: #fff !important;
+}
+.facebook i {
+	color: #fff !important;
+}
+.facebook:hover {
+  background-color: #4c70ba !important;
+}
+/* ########### For Responsive css / smaller screens ############ */
+@media only screen and (max-width: 600px) {
+    .main {
+        flex-direction: column; 
+    }
+    #content-left{
+    	margin-right: 0;
+
+    }
+    #log{
+    	width: 150%;
+    }
+    hr #vertical{
+    	display: none;
+    }
+
+}
