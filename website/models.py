@@ -1,6 +1,7 @@
 from django.db import models
 
-# Create your models here.
+from django.urls import reverse
+
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
@@ -10,6 +11,8 @@ from django.contrib.auth.models import User
 import datetime,os
 from decimal import Decimal
 
+from rest_framework.reverse import reverse as api_reverse
+#django host lib for url with subdomain for reverse
 
 
 # Create your models here.
@@ -69,6 +72,19 @@ class Events(models.Model):
 	)
 	visibleto = models.CharField(max_length=100, default='public', choices=CHOICES_VISIBLE, verbose_name='Visible To')
 	date_created = models.DateTimeField(("Date Created"), default=timezone.now)
+
+	def __str__(self):
+		return self.title
+	title.short_description = "Event Title"
+
+	@property
+	def owner(self):
+		return self.usrid
+
+	#to get url in api request
+	def get_api_url(self, request=None):
+		return api_reverse("api-world:events-rud", kwargs={'pk':self.pk},request=request)
+	
 
 class Wishlist(models.Model):
 	eid = models.ForeignKey(Events,verbose_name='Event',on_delete=models.CASCADE)

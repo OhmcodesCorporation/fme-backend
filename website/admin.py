@@ -8,15 +8,46 @@ from .models import *
 
 site_header = 'FME Backend'
 
-# class ProfileAdmin(admin.ModelAdmin):
+class DetailedProfileAdmin(admin.ModelAdmin):
 
-# 	class Meta:
-# 		model = Profile
+	class Meta:
+		model = DetailedProfile
 		
+	#fields = ['fnme','usrn']
+	#exclude = ['prod_regdate']
+	#ist_display = ('prod_name',)
 	
-# 	#fields = ['fnme','usrn']
-# 	#exclude = ['pwd']
-# 	#list_display = ('fullname', 'usr', 'eml', 'date_registered', 'action_buttons')
-		
 
-# admin.site.register(Profile, ProfileAdmin)
+admin.site.register(DetailedProfile, DetailedProfileAdmin)
+
+
+class UserFriendsAdmin(admin.ModelAdmin):
+
+	class Meta:
+		model = UserFriends
+
+admin.site.register(UserFriends, UserFriendsAdmin)
+
+
+class EventsAdmin(admin.ModelAdmin):
+
+	class Meta:
+		model = Events
+
+admin.site.register(Events, EventsAdmin)
+
+
+class WishlistAdmin(admin.ModelAdmin):
+
+	class Meta:
+		model = Wishlist
+
+admin.site.register(Wishlist, WishlistAdmin)
+
+
+class EventInviteesAdmin(admin.ModelAdmin):
+
+	class Meta:
+		model = EventInvitees
+
+admin.site.register(EventInvitees, EventInviteesAdmin)

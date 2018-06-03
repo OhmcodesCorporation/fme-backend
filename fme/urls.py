@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('website.urls')),
+    url(r'^api/', include('restful_api.urls', namespace='api-world')),
 ]
 
 
