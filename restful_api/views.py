@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 
 from rest_framework import generics, mixins
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.status import (
@@ -29,6 +29,14 @@ class UserLoginAPIView(APIView):
 		return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
+class UserDetailAPIView(generics.ListAPIView):
+	permission_classes = [IsAdminUser]
+	serializer_class = UserDetailSerializer
+
+	def get_queryset(self):
+		qs = User.objects.all()
+		return qs
+
 class UserCreateAPIView(generics.CreateAPIView):
 	serializer_class = UserCreateSerializer
 	qs = User.objects.all()
@@ -36,7 +44,7 @@ class UserCreateAPIView(generics.CreateAPIView):
 class EventsAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 	lookup_field = 'pk'
 	serializer_class = EventSerializer
-
+	
 	def get_queryset(self):
 		qs = Events.objects.all()
 		query = self.request.GET.get("q")
@@ -50,15 +58,14 @@ class EventsAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 	def post(self, request, *args, **kwargs):
 		return self.create(request, *args, **kwargs)
 
-	def put(self, request, *args, **kwargs):
-		return self.update(request, *args, **kwargs)
+	# def put(self, request, *args, **kwargs):
+	# 	return self.update(request, *args, **kwargs)
 
 	def get_serializer_context(self, *args, **kwargs):
 		return {"request": self.request}
 
 	# def patch(self, request, *args, **kwargs):
 	# 	return self.update(request, *args, **kwargs)
-
 
 class EventsRUDView(generics.RetrieveUpdateDestroyAPIView):
 	lookup_field = 'pk'

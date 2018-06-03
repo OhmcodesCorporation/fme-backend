@@ -17,15 +17,14 @@ from website.models import *
 
 class UserLoginSerializer(ModelSerializer):
 	token = CharField(allow_blank=True, read_only=True)
-	username = CharField(required=False, allow_blank=True)
-	email = EmailField(label="Email Address", required=False, allow_blank=True)
-	password = CharField(style={'input_type':'password'})
+	username = CharField(required=False, allow_blank=True, label="Username/Email")
+	#email = EmailField(label="Email Address", required=False, allow_blank=True)
+	password = CharField(style={'input_type':'password'}, write_only=True)
 	class Meta:
 		model = User
 		fields = [
 			'username',
 			'password',
-			'email',
 			'token',
 		]
 		extra_kwargs = {"password":{"write_only": True}}
@@ -35,11 +34,11 @@ class UserLoginSerializer(ModelSerializer):
 		email = data.get("email", None)
 		username = data.get("username", None)
 		password = data["password"]
-		if not email and not username:
+		if not username:
 			raise ValidationError("A username or email are required to login.")
 
 		user = User.objects.filter(
-				Q(email=email) |
+				Q(email=username) |
 				Q(username=username)
 			).distinct()
 		#if registered user doesnt have emails
@@ -52,6 +51,8 @@ class UserLoginSerializer(ModelSerializer):
 		if usrobj:
 			if not usrobj.check_password(password):
 				raise ValidationError("Incorrect Password.")
+
+		data["username"] = usrobj.username #Overide username response if email used for login
 
 		data["token"] = "RANDOM TOKEN"
 
@@ -69,8 +70,8 @@ class UserDetailSerializer(ModelSerializer):
 
 class UserCreateSerializer(ModelSerializer):
 	email = EmailField() #to be required field
-	password = CharField(style={'input_type':'password'})
-	password2 = CharField(label="Confirm Password", style={'input_type':"password"})
+	password = CharField(style={'input_type':'password'}, write_only=True)
+	password2 = CharField(label="Confirm Password", style={'input_type':"password"}, write_only=True)
 	class Meta:
 		model = User
 		fields = [
@@ -82,11 +83,19 @@ class UserCreateSerializer(ModelSerializer):
 		extra_kwargs = {"password":{"write_only": True}}
 
 	# def validate(self, data):
-	# 	email = data['email']
-	# 	user_qs = User.objects.filter(email=email)
-	# 	if user_qs.exists():
-	# 		raise ValidationError("This email has already registered")
+	# 	# email = data['email']
+	# 	# user_qs = User.objects.filter(email=email)
+	# 	# if user_qs.exists():
+	# 	# 	raise ValidationError("This email has already registered")
+	# 	# return data
+	# 	if not data.get('password') or not data.get('password2'):
+	# 		raise ValidationError("Please enter a password and confirm it.")
+
+	# 	if data.get('password') != data.get('password2'):
+	# 		raise ValidationError("Passwords didn't match.")
+
 	# 	return data
+
 
 	def validate_email(self, value):
 		data = self.get_initial()
@@ -140,14 +149,13 @@ class WishlistSerializer(ModelSerializer):
 class EventSerializer(ModelSerializer):
 	url = SerializerMethodField(read_only=True)
 	usrid = UserDetailSerializer(read_only=True)
-	wishlist = StringRelatedField(many=True) #get wishlist related to Event
+	wishlist = StringRelatedField(many=True, read_only=True) #get wishlist related to Event
 	wl_count = SerializerMethodField() #get wishlist count to related Event
 	class Meta:
 		model = Events
 		fields = [
 			'pk',
 			'url',
-			'usrid',
 			'title',
 			'desc',
 			'edate',
@@ -155,6 +163,7 @@ class EventSerializer(ModelSerializer):
 			'status',
 			'visibleto',
 			'date_created',
+			'usrid',
 			'wishlist',
 			'wl_count'
 		]
