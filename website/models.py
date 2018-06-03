@@ -87,7 +87,7 @@ class Events(models.Model):
 	
 
 class Wishlist(models.Model):
-	eid = models.ForeignKey(Events,verbose_name='Event',on_delete=models.CASCADE)
+	eid = models.ForeignKey(Events,verbose_name='Event', related_name='wishlist',on_delete=models.CASCADE)
 	name = models.CharField(max_length=300,verbose_name='Wish')
 	desc = models.CharField(max_length=3000,null=True,blank=True,verbose_name='Description')
 	message = models.CharField(max_length=3000,null=True,blank=True,verbose_name='Message')
@@ -95,6 +95,10 @@ class Wishlist(models.Model):
 	prod_link = models.URLField(max_length=200,null=True,blank=True,verbose_name='Url')
 	price = models.DecimalField(max_digits=20, decimal_places=2, default=Decimal('1.00'),verbose_name='Price')
 	date_created = models.DateTimeField(("Date Created"), default=timezone.now)
+
+	def __str__(self):
+		return self.name
+
 
 class EventInvitees(models.Model):
 	eid = models.ForeignKey(Events,verbose_name='Event',on_delete=models.CASCADE)
