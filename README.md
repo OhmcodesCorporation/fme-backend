@@ -19,6 +19,10 @@ FundMeDaddy
    * /api/members/             <=== members (Retrieve) admin only
    * /events/                  <=== Create (List if Get/Create if POST)
    * /events/**<event_id>**    <=== RUD (Retrieve/Update/Delete)
+
+###### View API
+    Normal link will show you BrowsableAPI
+    adding `?format=json` will give you a json raw result
    
 ###### Test Responses
    * Run curl in terminal
