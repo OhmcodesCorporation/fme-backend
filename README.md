@@ -14,6 +14,7 @@ FundMeDaddy
 ###### Restful API links
    * /api/                     <=== namespace for api but doesn't have view/get
    * /api/token/auth/          <=== to obtain user login token
+   * /api/token/refresh/       <=== logic wise its a token refresh :)
    * /api/login/               <=== login (post)
    * /api/register/            <=== register (Create)
    * /api/members/             <=== members (Retrieve) admin only
@@ -24,16 +25,20 @@ FundMeDaddy
     Normal link will show you BrowsableAPI
     adding `?format=json` will give you a json raw result
    
-###### Test Responses
-   * Run curl in terminal
-        *curl -X POST -H "Content-Type: application/json" -d '{"username":"**testuser6**","password":"**testuser69**"}' http://localhost:8000/api/token/auth/*
+###### Sample Obtain Token
+    curl -X POST -H "Content-Type: application/json" -d '{"username":"**testuser6**","password":"**testuser69**"}' http://localhost:8000/api/token/auth/ 
+    
+    Response
+    *{"token":"<generated_token>"}*
+    
+###### Sample Refresh Token
+    curl -X POST -H "Content-Type: application/json" -d '{"token":"<EXISTING_TOKEN>"}' http://localhost:8000/api/token/refresh/
+  
+##### Sample GET
+    curl -H "Authorization: JWT <token>" http://localhost:8000/api/events/*
         
-  * Sample Response
-  *{"token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJ1c2VybmFtZSI6InRlc3R1c2VyNiIsImV4cCI6MTUyODA2NzY0NiwiZW1haWwiOiJ0ZXN0NkB0ZXN0LmNvbSJ9.vhGG53DAvpfPTtxp7wmHhd-6E7S5FHsFxIROsTP3Njk"}*
-  * POST|GET Auth with token
-        *curl -H "Authorization: JWT **<your_token>**" http://localhost:8000/api/events/*
-  * Paste token
-        *curl -H "Authorization: JWT **eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJ1c2VybmFtZSI6InRlc3R1c2VyNiIsImV4cCI6MTUyODA2NzY0NiwiZW1haWwiOiJ0ZXN0NkB0ZXN0LmNvbSJ9.vhGG53DAvpfPTtxp7wmHhd-6E7S5FHsFxIROsTP3Njk**" http://localhost:8000/api/events/*
+##### Sample POST Event to current user (kindly check edate format)
+    curl -X POST -H "Authorization: JWT <token>" -H "Content-Type: application/json" -d '{"title":"Test Event 2","desc":"This is a test for curl","edate":"2018-07-23T02:22:43Z","target_fund":"3500","status":"inc","visibleto":"all"}'  http://localhost:8000/api/events/
         
         
     
