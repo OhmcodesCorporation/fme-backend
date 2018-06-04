@@ -24,7 +24,7 @@ Sample Response
 
 curl -H "Authorization: JWT <your_token>" http://localhost:8000/api/events/
 
-curl -H "Authorization: JWT <your_token>" http://localhost:8000/api/events/
+curl -H "Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo4LCJ1c2VybmFtZSI6InRlc3R1c2VyNiIsImV4cCI6MTUyODA2NzY0NiwiZW1haWwiOiJ0ZXN0NkB0ZXN0LmNvbSJ9.vhGG53DAvpfPTtxp7wmHhd-6E7S5FHsFxIROsTP3Njk" http://localhost:8000/api/events/
 
 
 

@@ -185,9 +185,9 @@ class EventSerializer(ModelSerializer):
 	#def validate(self, value): #for every fields
 	def validate_title(self, value): #for title only
 		qs = Events.objects.filter(title__iexact=value) #including the whole instance
-		if self.intance:
+		if self.instance:
 			qs = qs.exlude(pk=self.instance.pk)
-		if qs.exist():
+		if qs.exists():
 			raise ValidationError("Event Exist and must be unique")
 		return value
 

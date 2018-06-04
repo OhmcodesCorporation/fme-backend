@@ -53,7 +53,7 @@ class EventsAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 		return qs
 
 	def perform_create(self, serializer):
-		serializer.save(user=self.request.user)
+		serializer.save(usrid=self.request.user)
 
 	def post(self, request, *args, **kwargs):
 		return self.create(request, *args, **kwargs)
