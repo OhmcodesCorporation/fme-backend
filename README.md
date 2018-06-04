@@ -8,7 +8,7 @@ FundMeDaddy
     source bin/activate
     git clone https://github.com/NewWorldInnovations/fme.git
     cd fme
-    pip freeze -r requirements.txt
+    pip install -r requirements.txt
     python manage.py runserver
     
 ###### Restful API links
