@@ -34,10 +34,10 @@ FundMeDaddy
 ###### Sample Refresh Token
     curl -X POST -H "Content-Type: application/json" -d '{"token":"<EXISTING_TOKEN>"}' http://localhost:8000/api/token/refresh/
   
-##### Sample GET
+###### Sample GET
     curl -H "Authorization: JWT <token>" http://localhost:8000/api/events/*
         
-##### Sample POST Event to current user (kindly check edate format)
+###### Sample POST Event to current user (kindly check edate format)
     curl -X POST -H "Authorization: JWT <token>" -H "Content-Type: application/json" -d '{"title":"Test Event 2","desc":"This is a test for curl","edate":"2018-07-23T02:22:43Z","target_fund":"3500","status":"inc","visibleto":"all"}'  http://localhost:8000/api/events/
         
         
