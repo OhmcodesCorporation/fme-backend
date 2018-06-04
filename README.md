@@ -15,6 +15,7 @@ FundMeDaddy
    * /api/                     <=== namespace for api but doesn't have view/get
    * /api/token/auth/          <=== to obtain user login token
    * /api/token/refresh/       <=== logic wise its a token refresh :)
+   * /api/token/verify/        <=== Verify as usual
    * /api/login/               <=== login (post)
    * /api/register/            <=== register (Create)
    * /api/members/             <=== members (Retrieve) admin only
@@ -25,14 +26,18 @@ FundMeDaddy
     Normal link will show you BrowsableAPI
     adding `?format=json` will give you a json raw result
    
-###### Sample Obtain Token
+###### Obtain Token
     curl -X POST -H "Content-Type: application/json" -d '{"username":"**testuser6**","password":"**testuser69**"}' http://localhost:8000/api/token/auth/ 
     
     Response
     *{"token":"<generated_token>"}*
     
-###### Sample Refresh Token
+###### Refresh Token
     curl -X POST -H "Content-Type: application/json" -d '{"token":"<EXISTING_TOKEN>"}' http://localhost:8000/api/token/refresh/
+    
+###### Verify Token after refresh
+    curl -X POST -H "Content-Type: application/json" -d '{"token":"<EXISTING_TOKEN>"}' http://localhost:8000/api/token/verify/
+
   
 ###### Sample GET
     curl -H "Authorization: JWT <token>" http://localhost:8000/api/events/*
