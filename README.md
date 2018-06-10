@@ -12,7 +12,7 @@ FundMeDaddy
     python manage.py runserver
     
 ###### Restful API links
-   * /api/                         <=== namespace for api but doesn't have view/get
+   * ```/api/```                         <=== namespace for api but doesn't have view/get
    * /api/token/auth/              <=== to obtain user login token
    * /api/token/refresh/           <=== logic wise its a token refresh :)
    * /api/token/verify/            <=== Verify as usual
