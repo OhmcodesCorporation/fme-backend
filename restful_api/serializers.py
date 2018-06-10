@@ -146,9 +146,11 @@ class WishlistSerializer(ModelSerializer):
 	class Meta:
 		model = Wishlist
 		fields = [
+			'pk',
+			'eid',
 			'name',
 			'desc',
-			'allotted',
+			'alotted',
 			'prod_link',
 			'price',
 			'date_created',
@@ -157,7 +159,8 @@ class WishlistSerializer(ModelSerializer):
 class EventSerializer(ModelSerializer):
 	url = SerializerMethodField(read_only=True)
 	usrid = UserDetailSerializer(read_only=True)
-	wishlist = StringRelatedField(many=True, read_only=True) #get wishlist related to Event
+	wishlist = WishlistSerializer(many=True, read_only=True)
+	#wl = StringRelatedField(many=True, read_only=True) #get wishlist related to Event
 	wl_count = SerializerMethodField() #get wishlist count to related Event
 	class Meta:
 		model = Events
@@ -172,11 +175,11 @@ class EventSerializer(ModelSerializer):
 			'visibleto',
 			'date_created',
 			'usrid',
-			'wishlist',
-			'wl_count'
+			'wl_count',
+			'wishlist'
 		]
 
-		read_only_fields = ['usrid','date_created', 'wishlist', 'wl_count']
+		read_only_fields = ['usrid','date_created', 'wl_count']
 
 	# def get_wl(self, obj):
 	# 	return WishlistSerializer(obj, many=True).data

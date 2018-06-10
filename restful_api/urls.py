@@ -12,6 +12,8 @@ urlpatterns = [
 	url(r'^members/$', UserDetailAPIView.as_view(), name='members'),
 	url(r'^events/$', EventsAPIView.as_view(), name='events-create'),
 	url(r'^events/(?P<pk>\d+)/$', EventsRUDView.as_view(), name='events-rud'),
+	url(r'^wishlist/$', WishlistAPIView.as_view(), name='wish-create'),
+	url(r'^wishlist/(?P<pk>\d+)/$', WishlistRUDView.as_view(), name='wish-rud'),
 ]
 
 

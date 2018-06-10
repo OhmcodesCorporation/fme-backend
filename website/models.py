@@ -91,13 +91,17 @@ class Wishlist(models.Model):
 	name = models.CharField(max_length=300,verbose_name='Wish')
 	desc = models.CharField(max_length=3000,null=True,blank=True,verbose_name='Description')
 	message = models.CharField(max_length=3000,null=True,blank=True,verbose_name='Message')
-	alotted = models.DecimalField(blank=True, max_digits=20, decimal_places=2, default=Decimal('0.00'),verbose_name='Alotted')
+	alotted = models.DecimalField(max_digits=20, decimal_places=2, default=Decimal('0.00'),verbose_name='Alotted')
 	prod_link = models.URLField(max_length=200,null=True,blank=True,verbose_name='Url')
 	price = models.DecimalField(max_digits=20, decimal_places=2, default=Decimal('1.00'),verbose_name='Price')
 	date_created = models.DateTimeField(("Date Created"), default=timezone.now)
 
 	def __str__(self):
 		return self.name
+
+	@property
+	def owner(self):
+		return self.eid.usrid
 
 
 class EventInvitees(models.Model):
