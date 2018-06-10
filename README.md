@@ -21,10 +21,9 @@ FundMeDaddy
    * /api/members/                 <=== members (Retrieve) admin only
    * /api/events/                  <=== Create (List if Get/Create if POST)
    * /api/events/**<event_id>**    <=== RUD (Retrieve/Update/Delete) methods: (-X GET) (-X PUT) (-X DELETE)
-   **PENDING LINKS**
-   * /api/wish/**<event_id>**      <=== event_id pass to wish create view for object foreign key purposes
+   * /api/wishlist/                <=== event_id pass to wish create view for object foreign key purposes
                                     OR can be direct as long as included in post eg: {"eid":"<event_id>"}
-   * /api/wish/**<event_id>**      <=== RUD (Retrieve/Update/Delete) methods: (-X GET) (-X PUT) (-X DELETE)
+   * /api/wishlist/**<event_id>**  <=== RUD (Retrieve/Update/Delete) methods: (-X GET) (-X PUT) (-X DELETE)
 
 ###### View API
     Normal link will show you BrowsableAPI
