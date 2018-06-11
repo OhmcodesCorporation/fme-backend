@@ -11,16 +11,16 @@
 		}
 
 	* Wishlist
-			{
-				"pk": 1, (<primary_key>)
-		        "eid": 1, (<event_id>)
-		        "name": "", (required)
-		        "desc": "", (exclude if null)
-		        "alotted": "0.00", (exclude if null)
-		        "prod_link": "", (exclude if null)
-		        "price": "600.00", (required)
-		        "date_created": "", (auto generated)
-			}
+		{
+			"pk": 1, (<primary_key>)
+	        "eid": 1, (<event_id>)
+	        "name": "", (required)
+	        "desc": "", (exclude if null)
+	        "alotted": "0.00", (exclude if null)
+	        "prod_link": "", (exclude if null)
+	        "price": "600.00", (required)
+	        "date_created": "", (auto generated)
+		}
 
 # RESPONSES
 	* Events
@@ -87,7 +87,7 @@
 		    },
 		    ....
 		    .......
-	]
+		]
 	* Wishlist
 		[
 		    {
