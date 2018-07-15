@@ -78,3 +78,52 @@ class EventsRUDView(generics.RetrieveUpdateDestroyAPIView):
 
 	def get_serializer_context(self, *args, **kwargs):
 		return {"request": self.request}
+<<<<<<< HEAD
+=======
+
+
+
+class WishlistAPIView(mixins.CreateModelMixin, generics.ListAPIView):
+	lookup_field = 'pk'
+	serializer_class = WishlistSerializer
+	permission_classes = [IsOwnerOrReadOnly]
+	
+	def get_queryset(self):
+		qs = Wishlist.objects.all()
+		query = self.request.GET.get("q")
+		if query is not None:
+			qs = qs.filter( Q(title__icontains=query) | Q(desc__icontains=query) ).distinct()
+		return qs
+
+	def perform_create(self, serializer):
+		try:
+			event = Events.objects.get(usrid=self.request.user,pk=self.request.data.get('eid'))
+			serializer.save(eid=event)
+		except:
+			return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+		
+
+	def post(self, request, *args, **kwargs):
+		return self.create(request, *args, **kwargs)
+
+	# def put(self, request, *args, **kwargs):
+	# 	return self.update(request, *args, **kwargs)
+
+	def get_serializer_context(self, *args, **kwargs):
+		print(self.request)
+		return {"request": self.request}
+
+	# def patch(self, request, *args, **kwargs):
+	# 	return self.update(request, *args, **kwargs)
+
+class WishlistRUDView(generics.RetrieveUpdateDestroyAPIView):
+	lookup_field = 'pk'
+	serializer_class = WishlistSerializer
+	permission_classes = [IsOwnerOrReadOnly]
+
+	def get_queryset(self):
+		return Wishlist.objects.all()
+
+	def get_serializer_context(self, *args, **kwargs):
+		return {"request": self.request}
+>>>>>>> e724deb5b04adb3e389114a87a8e65a6ea84d249
