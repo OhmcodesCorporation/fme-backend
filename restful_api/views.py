@@ -38,13 +38,14 @@ class UserDetailAPIView(generics.ListAPIView):
 		return qs
 
 class UserCreateAPIView(generics.CreateAPIView):
+	permission_classes = [AllowAny]
 	serializer_class = UserCreateSerializer
 	qs = User.objects.all()
 
 class EventsAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 	lookup_field = 'pk'
 	serializer_class = EventSerializer
-	
+
 	def get_queryset(self):
 		qs = Events.objects.all()
 		query = self.request.GET.get("q")
