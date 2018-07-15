@@ -78,16 +78,12 @@ class EventsRUDView(generics.RetrieveUpdateDestroyAPIView):
 
 	def get_serializer_context(self, *args, **kwargs):
 		return {"request": self.request}
-<<<<<<< HEAD
-=======
-
-
 
 class WishlistAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 	lookup_field = 'pk'
 	serializer_class = WishlistSerializer
 	permission_classes = [IsOwnerOrReadOnly]
-	
+
 	def get_queryset(self):
 		qs = Wishlist.objects.all()
 		query = self.request.GET.get("q")
@@ -101,7 +97,7 @@ class WishlistAPIView(mixins.CreateModelMixin, generics.ListAPIView):
 			serializer.save(eid=event)
 		except:
 			return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
-		
+
 
 	def post(self, request, *args, **kwargs):
 		return self.create(request, *args, **kwargs)
@@ -126,4 +122,3 @@ class WishlistRUDView(generics.RetrieveUpdateDestroyAPIView):
 
 	def get_serializer_context(self, *args, **kwargs):
 		return {"request": self.request}
->>>>>>> e724deb5b04adb3e389114a87a8e65a6ea84d249
